@@ -1,0 +1,56 @@
+apply plugin: 'maven-publish'
+
+buildscript {
+  ext {
+    springBootVersion = '1.5.3.RELEASE'
+  }
+
+  repositories {
+    mavenLocal()
+  }
+
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath("com.moowork.gradle:gradle-node-plugin:0.13")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.moowork.node'
+apply plugin: 'org.springframework.boot'
+
+allprojects {
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  repositories {
+    mavenLocal()
+  }
+
+  tasks.withType(JavaCompile) {
+    options.incremental = true
+  }
+}
+
+springBoot {
+  mainClass = 'org.smartbear.SmartBearBoot'
+}
+
+
+
+dependencies {
+  compile project(":server")
+}
+
+subprojects {
+  apply plugin: 'java'
+
+  configure(allprojects - project(':web')) {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+      compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+    }
+  }
+}

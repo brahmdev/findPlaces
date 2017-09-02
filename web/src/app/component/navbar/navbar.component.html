@@ -1,0 +1,31 @@
+<!-- BEGIN PORTAL NAVIGATION -->
+<div class="row portal-navigation" *ngIf="showNavBar">
+  <div class="col-md-12">
+    <nav class="navbar navbar-default portal-navigation" role="navigation">
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav mainMenu" style="padding: 10px;">
+          <li (click)="hideSecondaryNavbar()">
+            <a routerLink="/{{homeRouterLink}}" class="sbMenuHeading">{{homeLinkLabel}}</a>
+          </li>
+          <li style="cursor: pointer" [ngClass]="{'active': activeNavbar === sbPlacesRouterLink}" (click)="toggleSBPlacesNavbar()">
+            <a class="sbMenuHeading">{{sbLinkLabel}} <b class="caret"></b></a>
+          </li>
+          <li [routerLinkActive]="['active']" (click)="hideSecondaryNavbar()">
+            <a class="sbMenuHeading" routerLink="/{{helpRouterLink}}">{{helpLinkLabel}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="collapse navbar-default sub-navigation navbar-collapse navbar-ex1-collapse" *ngIf="activeNavbar === 'places'">
+        <ul class="nav navbar-nav">
+          <li [routerLinkActive]="['active']">
+            <a class="sbSubMenu" routerLink="/{{showSBPlacesRouterLink}}">{{showSBPlacesLinkLabel}}</a>
+          </li>
+          
+        </ul>
+      </div>
+
+    </nav>
+  </div>
+</div>
+<!-- END PORTAL NAVIGATION -->

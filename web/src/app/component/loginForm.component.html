@@ -1,0 +1,19 @@
+<hr/>
+<p-growl [value]="msgs" sticky="true" class="growl-position"></p-growl>
+<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 loginForm">
+  <h1>WELOME TO SmartBear</h1>
+  <form [formGroup]="loginform" (ngSubmit)="loginUser(loginform.value)">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" formControlName="username" class="form-control" id="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="password">
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!loginform.valid">Login</button>
+
+  </form>
+</div>

@@ -1,0 +1,62 @@
+// frontend build.gradle
+
+apply plugin: 'com.moowork.node'
+node {
+  version = '6.10.3'
+  npmVersion = '3.10.10'
+  download = false
+  workDir = file("${project.projectDir}/node")
+  nodeModulesDir = file("${project.projectDir}/")
+}
+
+// clean task for npm
+task npmClean(type: Delete, group: 'node') {
+  final webDir = "${project.projectDir}"
+  delete "${webDir}/dist"
+  delete "${webDir}/coverage"
+}
+
+clean.dependsOn(npmClean)
+
+task npmStart(type: NpmTask) {
+  args = ['start']
+  group = "node"
+  dependsOn("npmInstall")
+}
+
+task npmBuild(type: NpmTask) {
+  args = ['run', 'build-prod']
+  group = "node"
+  dependsOn("npmInstall")
+}
+
+/*task npmTest(type: NpmTask) {
+  args = ['run', 'test']
+  group = "node"
+  dependsOn("npmInstall")
+}*/
+
+//test.dependsOn(npmTest)
+
+jar {
+  dependsOn("npmBuild")
+
+  from(fileTree("dist")) {
+    exclude("*.map")
+    into "public"
+  }
+  println "${project.projectDir}"
+}
+
+tasks.withType(Jar).all { Jar jar ->
+  jar.doFirst {
+    final fileName = "buildinfo.json"
+    final webDir = "${project.projectDir}"
+    final distDir = "$webDir/dist"
+    final buildInfoFile = "$webDir/$fileName"
+    final updatedContent = new File(buildInfoFile).getText('UTF-8')
+      .replaceAll("@version@", project.version)
+      .replaceAll("@buildDate@", new Date().format('yyyy-MM-dd HH:mm'))
+    new File("$distDir/$fileName").write(updatedContent, 'UTF-8')
+  }
+}

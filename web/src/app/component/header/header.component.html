@@ -1,0 +1,32 @@
+<!-- BEGIN HEADER -->
+
+<div id="prototype-header" class="brand-header">
+  <!-- BEGIN LEFT SIDE HEADER -->
+
+  <div class="col-md-6 clearfix">
+    <a class="navbar-brand sb-portal-logo" href="/"></a>
+    <div class="site-heading" style="font-weight: bold">Give me Place</div>
+
+  </div>
+  <!-- END LEFT SIDE HEADER -->
+  <!-- BEGIN RIGHT SIDE HEADER -->
+  <div class="col-md-6 clearfix">
+    <div class="navbar-right header-links hidden-print">
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown"  *ngIf="showUserProfileComponent">
+          <a href="#"  (click)="logout()" class="dropdown-toggle" data-toggle="dropdown">
+            <strong>Welcome User</strong>
+            <span class="glyphicon glyphicon-log-out"></span>
+          </a>
+        </li>
+      
+        <li><span class="symbol" href="#contact"></span></li>
+      </ul>
+
+
+    </div>
+  </div>
+  <!-- END RIGHT SIDE HEADER -->
+</div>
+<!-- END HEADER -->

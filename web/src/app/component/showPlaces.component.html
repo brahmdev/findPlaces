@@ -1,0 +1,112 @@
+<p-growl [value]="msgs"></p-growl>
+<br>
+<div class="showPlacesComponent">
+<form [formGroup]="placesform" (ngSubmit)="onSubmit(placesform.value)">
+    <p-panel header="Places Filter" [toggleable]="true" [collapsed]="false">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Location *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName="location" placeholder="Location"/>
+                </div>
+                <!--<div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!placesform.controls['location'].valid&&placesform.controls['location'].dirty">
+                        <i class="fa fa-close"></i>
+                        Location is required
+                    </div>
+                </div>-->
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Radius *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName="radius" placeholder="Radius"/>
+                </div>
+                <!--<div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!placesform.controls['radius'].valid&&placesform.controls['radius'].dirty">
+                        <i class="fa fa-close"></i>
+                        Radius is required
+                    </div>
+                </div>-->
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Keyword *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName="keyword" placeholder="Keyword"/>
+                </div>
+                <!--<div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!placesform.controls['keyword'].valid&&placesform.controls['keyword'].dirty">
+                        <i class="fa fa-close"></i>
+                        <span *ngIf="placesform.controls['keyword'].errors['required']">Keyword is required</span>
+                    </div>
+                </div>-->
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Type *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input pInputText type="text" formControlName="type" placeholder="Type"/>
+                </div>
+                <!--<div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!placesform.controls['type'].valid&&placesform.controls['type'].dirty">
+                        <i class="fa fa-close"></i>
+                        <span *ngIf="placesform.controls['type'].errors['required']">Keyword is required</span>
+                    </div>
+                </div>-->
+            </div>
+            
+           <div class="ui-grid-row">
+                <div class="ui-grid-col-2"></div>
+                <div class="ui-grid-col-6">
+                    <button pButton type="submit" label="Submit" [disabled]="!placesform.valid" (click)="findPlaces()"></button>
+                </div>
+                <div class="ui-grid-col-4"></div>
+            </div>
+           <!-- <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+                Form Submitted
+                <br>
+                {{diagnostic}}
+            </div>-->
+        </div>
+    </p-panel>
+</form>
+<br>
+
+<p-dataList [value]="places" [paginator]="true" [rows]="5">
+    <p-header>
+        List of Places
+    </p-header>
+    <ng-template let-place pTemplate="item">
+        <div class="ui-g ui-fluid car-item">
+            <div class="ui-g-12 ui-md-3" style="text-align:center">
+                <img src="{{place.icon}}">
+            </div>
+            <div class="ui-g-12 ui-md-9 car-details">
+                <div class="ui-g">
+                    <div class="ui-g-2 ui-sm-6">Name: </div>
+                    <div class="ui-g-10 ui-sm-6">{{place.name}}</div>
+                    
+                    <div class="ui-g-2 ui-sm-6">Vicinity: </div>
+                    <div class="ui-g-10 ui-sm-6">{{place.vicinity}}</div>
+                    
+                    <div class="ui-g-2 ui-sm-6">Longitude: </div>
+                    <div class="ui-g-10 ui-sm-6">{{place.lng}}</div>
+                    
+                    <div class="ui-g-2 ui-sm-6">Latitude: </div>
+                    <div class="ui-g-10 ui-sm-6">{{place.lat}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Elevation: </div>
+                    <div class="ui-g-10 ui-sm-6">{{place.elevation}}</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataList>
+
+</div>
