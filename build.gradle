@@ -1,16 +1,16 @@
-apply plugin: 'maven-publish'
-
 buildscript {
   ext {
-    springBootVersion = '1.5.3.RELEASE'
+    springBootVersion = '1.5.6.RELEASE'
   }
 
   repositories {
-    mavenLocal()
+    mavenCentral()
+	maven { url "http://repo.spring.io/release" }
+    maven { url "https://plugins.gradle.org/m2/" }
   }
 
   dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
     classpath("com.moowork.gradle:gradle-node-plugin:0.13")
   }
 }
@@ -24,7 +24,8 @@ allprojects {
   targetCompatibility = 1.8
 
   repositories {
-    mavenLocal()
+    mavenCentral()
+	maven { url "http://repo.spring.io/release" }
   }
 
   tasks.withType(JavaCompile) {
@@ -36,10 +37,14 @@ springBoot {
   mainClass = 'org.smartbear.SmartBearBoot'
 }
 
-
+jar {
+    baseName = 'sb.find.places'
+    version = '1.0'
+}
 
 dependencies {
   compile project(":server")
+  compile project(":web")
 }
 
 subprojects {
@@ -50,7 +55,6 @@ subprojects {
 
     dependencies {
       compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-
     }
   }
 }

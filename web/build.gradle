@@ -25,18 +25,10 @@ task npmStart(type: NpmTask) {
 }
 
 task npmBuild(type: NpmTask) {
-  args = ['run', 'build-prod']
+  args = ['run', 'build']
   group = "node"
   dependsOn("npmInstall")
 }
-
-/*task npmTest(type: NpmTask) {
-  args = ['run', 'test']
-  group = "node"
-  dependsOn("npmInstall")
-}*/
-
-//test.dependsOn(npmTest)
 
 jar {
   dependsOn("npmBuild")
@@ -60,3 +52,4 @@ tasks.withType(Jar).all { Jar jar ->
     new File("$distDir/$fileName").write(updatedContent, 'UTF-8')
   }
 }
+

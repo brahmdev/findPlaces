@@ -49,6 +49,12 @@ public class FindPlacesService {
 	@Value("${ELEVATION.API.KEY}")
 	private String ELEVATION_API_KEY;
 	
+	@Value("${SEARCH.API_URL}")
+	private String SEARCH_API_URL;
+	
+	@Value("${ELEVATION.API.URL}")
+	private String ELEVATION_API_URL;
+	
 	/**
 	 * 
 	 * <p>This method exposes a REST(REpresentational State Transfer) service with URL {@code}/service/findPlaces</p>
@@ -87,14 +93,14 @@ public class FindPlacesService {
 		
 		try {
 		String resultPlaceSearch = restTemplate
-		.getForObject("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location}&radius={radius}&type={type}&keyword={keyword}&key={key}",
+		.getForObject(SEARCH_API_URL + "location={location}&radius={radius}&type={type}&keyword={keyword}&key={key}",
 		String.class, vars);
 		
 		PlaceSearchModal placeSearchModal = mapper.readValue(resultPlaceSearch, PlaceSearchModal.class);
 		
 		vars.put("key", ELEVATION_API_KEY);
 		String resultElevationSearch = restTemplate
-		.getForObject("https://maps.googleapis.com/maps/api/elevation/json?locations={location}&key={key}",
+		.getForObject(ELEVATION_API_URL + "locations={location}&key={key}",
 		String.class, vars);
 		
 		ElevationSearchModal elevationSearchModal = mapper.readValue(resultElevationSearch, ElevationSearchModal.class);

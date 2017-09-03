@@ -1,1 +1,4 @@
 include ':server', ':web'
+rootProject.name = 'SmartBear'
+include 'server'
+include 'web'
