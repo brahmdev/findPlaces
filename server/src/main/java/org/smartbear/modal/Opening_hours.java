@@ -1,5 +1,12 @@
 package org.smartbear.modal;
 
+/**
+ * 
+ * @author KalpDev
+ * @version 1.0
+ * @since 02-09-2017
+ *
+ */
 public class Opening_hours {
 	private String open_now;
 

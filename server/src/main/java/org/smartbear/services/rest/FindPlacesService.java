@@ -1,12 +1,10 @@
 package org.smartbear.services.rest;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smartbear.modal.ElevationSearchModal;
@@ -30,8 +28,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * <h2>Find the Places</h2>
  * 
  * @author KalpDev
+ * @version 1.0
+ * @since 02-09-2017
  *
  */
 
@@ -47,17 +48,29 @@ public class FindPlacesService {
 	
 	@Value("${ELEVATION.API.KEY}")
 	private String ELEVATION_API_KEY;
+	
 	/**
 	 * 
-	 * @param location
-	 * @param radius
-	 * @param type
-	 * @param keyword
-	 * @return
-	 * @throws JSONException
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
+	 * <p>This method exposes a REST(REpresentational State Transfer) service with URL {@code}/service/findPlaces</p>
+	 * <p>It required following parameters</p>
+	 * <ul>
+	 * 	<li>1) location (Required Parameter - This parameter is passed as Path Variable)</li>
+	 * 	<li>2) radius (Required Parameter - This parameter is passed as Path Variable)</li>
+	 * 	<li>3) type (Optional Parameter - This parameter is passed as one of the attribute of the POST Data)</li>
+	 * 	<li>4) keyword (Optional Parameter - This parameter is passed as one of the attribute of the POST Data)</li>
+	 * </ul>
+	 * <p>This method access 2 google API's</p>
+	 * <ul>
+	 * 	<li>Find the NearBy Places - for more information please refer : {@link} https://developers.google.com/places/web-service/search</li>
+	 *  <li>Find the Elevation - for more information please refer : {@link} https://developers.google.com/maps/documentation/elevation/start</li>
+	 * </ul>
+	 * <p>Errors are logged into the ${java.io.tmpdir}/application.log location</p>
+	 * 
+	 * @param location First Mandatory Parameter as a Path Variable which is used for specifying the location for Google Places Search API
+	 * @param radius Second Mandatory Parameter as a Path Variable which is used for specifying the Range/Radius for Google Places Search API
+	 * @param type Third Optional Parameter as a POST Data Load which is used for specifying the location for Google Places Search API
+	 * @param keyword Fourth Optional Parameter as a POST Data Load which is used for specifying the location for Google Places Search API
+	 * @return Spring ResponseEntity which consists ArrayList of ResponseModal Object
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/findPlaces/{location}/{radius}")
 	public ResponseEntity<List<ResponseModal>> getPlaceForMe(@PathVariable String location, @PathVariable String radius, @RequestParam(value="type") String type, @RequestParam(value="keyword") String keyword) {
@@ -93,8 +106,6 @@ public class FindPlacesService {
 			logger.error("JSON was not parsed because of : " + ex.getMessage());
 		} catch(JsonMappingException ex) {
 			logger.error("Following excaption came while mapping the JSON : " + ex.getMessage());
-		} catch(IOException ex) {
-			logger.error(ex.getMessage());
 		} catch(Exception ex) {
 			logger.error(ex.getMessage());
 		} 
