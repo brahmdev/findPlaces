@@ -49,7 +49,7 @@ public class FindPlacesService {
 	@Value("${ELEVATION.API.KEY}")
 	private String ELEVATION_API_KEY;
 	
-	@Value("${SEARCH.API_URL}")
+	@Value("${SEARCH.API.URL}")
 	private String SEARCH_API_URL;
 	
 	@Value("${ELEVATION.API.URL}")
