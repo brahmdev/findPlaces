@@ -38,7 +38,7 @@ springBoot {
 }
 
 jar {
-    baseName = 'sb.find.places'
+    baseName = 'SmartBear_FindPlaces'
     version = '1.0'
 }
 
