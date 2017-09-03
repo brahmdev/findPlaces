@@ -1,12 +1,12 @@
 <p-growl [value]="msgs"></p-growl>
 <br>
 <div class="showPlacesComponent">
-<form [formGroup]="placesform" (ngSubmit)="onSubmit(placesform.value)">
+<form [formGroup]="placesform">
     <p-panel header="Places Filter" [toggleable]="true" [collapsed]="false">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2">
-                    Location *:
+                    Location <span class="mandatory">*</span>:
                 </div>
                 <div class="ui-grid-col-6">
                     <input pInputText type="text" formControlName="location" placeholder="Location"/>
@@ -20,7 +20,7 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2">
-                    Radius *:
+                    Radius <span class="mandatory">*</span>
                 </div>
                 <div class="ui-grid-col-6">
                     <input pInputText type="text" formControlName="radius" placeholder="Radius"/>
@@ -34,7 +34,7 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2">
-                    Keyword *:
+                    Keyword:
                 </div>
                 <div class="ui-grid-col-6">
                     <input pInputText type="text" formControlName="keyword" placeholder="Keyword"/>
@@ -48,7 +48,7 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2">
-                    Type *:
+                    Type:
                 </div>
                 <div class="ui-grid-col-6">
                     <input pInputText type="text" formControlName="type" placeholder="Type"/>

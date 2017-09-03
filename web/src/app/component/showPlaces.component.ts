@@ -49,30 +49,26 @@ export class ShowPlacesComponent implements OnInit {
         ];
     }
 
-    onSubmit(value: string) {
-        this.submitted = true;
-        this.msgs = [];
-        this.msgs.push({severity:'info', summary:'Success', detail:'Form Submitted'});
-    }
-
     findPlaces() { 
-        debugger;
         let location = this.placesform.value.location;
         let radius = this.placesform.value.radius;
         let type = this.placesform.value.type;
         let keyword = this.placesform.value.keyword;
-
-        this.showPlacesServie.giveMePlaces(location, radius, type, keyword).subscribe(
-            data => this.places = data,
-            error => alert(error),
-            () => this.populateData()
-            );
-            debugger;
+        
+        if(location == "" && radius == "") {
+            this.msgs = [];
+            this.msgs.push({severity:'error', summary:'Error', detail:'Location & Radius are mandatory field!'});
+        } else {
+            this.showPlacesServie.giveMePlaces(location, radius, type, keyword).subscribe(
+                data => this.places = data,
+                error => alert(error),
+                () => this.populateData()
+                );
+        } 
         return JSON.stringify(this.placesform.value); 
     }
 
     populateData() {
         this.msgs.push({severity:'success', summary:'Success', detail:'Data for Places Fetched Successfully'});
-        debugger;
     }
 }

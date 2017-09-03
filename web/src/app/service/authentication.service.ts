@@ -30,7 +30,7 @@ export class AuthenticationService {
    }
 
   getUserLoggedIn() {
-    debugger;
+    
      if(localStorage.getItem('currentUser')) {
       this.isUserLoggedIn = true;
       this.globalEventsMangaer.isUserLoggedIn(true);

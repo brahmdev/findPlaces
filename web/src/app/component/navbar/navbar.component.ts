@@ -25,7 +25,7 @@ export class NavbarComponent {
 
     this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
       // mode will be null the first time it is created, so you need to igonore it when null
-      debugger;
+      
       if (mode !== null) {
         this.showNavBar = mode;
       }

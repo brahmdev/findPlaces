@@ -13,7 +13,7 @@ export class GlobalEventsManager {
   constructor() {}
 
   isUserLoggedIn(ifShow: boolean) {
-    debugger;
+    
     this._showNavBar.next(ifShow);
   }
 
